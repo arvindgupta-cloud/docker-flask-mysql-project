@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template_string
+from flask import Flask, request, render_template_string, redirect, url_for
 import mysql.connector
 
 app = Flask(__name__)
@@ -61,6 +61,9 @@ def home():
             comment_text = request.form['comment']
             cursor.execute("INSERT INTO messages (text) VALUES (%s)", (comment_text,))
             conn.commit()
+
+            # After inserting, redirect to the same page to avoid re-submission on refresh
+            return redirect(url_for('home'))
 
         # Fetch all comments
         cursor.execute("SELECT text FROM messages ORDER BY id DESC")
