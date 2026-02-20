@@ -105,3 +105,28 @@ docker compose down
 *Stops and removes all containers and networks created by the `up` command.*
 
   > By default, this command stops and deletes the containers and networks created by `docker compose up`, but does **not** delete named volumes unless the `-v` flag is also used.
+
+
+# Tag and Push the image to Dockerhub
+
+**Tag the image**
+
+```bash
+docker tag my-app:latest ag126667/my-app:v1.0
+```
+
+**Push the Image to Docker Hub**
+
+```bash
+docker push ag126667/my-app:v1.0
+```
+
+**Run the Image on Any Server**
+
+```bash
+# Pull the image from Docker Hub
+docker pull ag126667/my-app:v1.0
+
+# Run the container
+docker run -d -p 5000:5000 --name my-app ag126667/my-app:v1.0
+```
