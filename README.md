@@ -130,3 +130,15 @@ docker pull ag126667/my-app:v1.0
 # Run the container
 docker run -d -p 5000:5000 --name my-app ag126667/my-app:v1.0
 ```
+
+# What is Distroless?
+Distroless is a term used for a Docker image without a full operating system (like Ubuntu, Alpine, etc.). Instead of including all the usual libraries and tools that come with a traditional OS, a distroless image contains only the essential components needed to run your application.
+
+**In simpler terms:**
+- A normal image might come with a full OS (e.g., ubuntu, alpine), including things like package managers, shells, etc.
+- A distroless image comes only with your app and its runtime dependencies — no unnecessary OS layers.
+
+```text
+FROM gcr.io/distroless/python3-debian12
+```
+
