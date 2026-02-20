@@ -1,0 +1,41 @@
+version: "3.8"
+
+services:
+  mysql:
+    image: mysql:latest
+    container_name: mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: admin
+      MYSQL_DATABASE: flask_db
+    volumes:
+      - arvind-data:/var/lib/mysql
+      - ./db-init:/docker-entrypoint-initdb.d
+    ports:
+      - "3306:3306"
+    networks:
+      - arvind-network
+
+  web:
+    build: .
+    image: my-app
+    container_name: my-app
+    restart: unless-stopped
+    depends_on:
+      - mysql
+    environment:
+      - MYSQL_HOST=mysql
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=admin
+      - MYSQL_DATABASE=flask_db
+    ports:
+      - "5000:5000"
+    networks:
+      - arvind-network
+
+volumes:
+  arvind-data:
+    external: true
+networks:
+  arvind-network:
+    external: true
