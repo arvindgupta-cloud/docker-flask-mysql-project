@@ -1,4 +1,4 @@
-# Docker + Flask + MySQL Setup (with Persistent Volume)
+# Docker + Flask + MySQL Setup (with Persistent Volume) 
 
 ## ✅ 1. Pull and Run MySQL with a Volume
 
@@ -79,3 +79,29 @@ docker network connect arvind-network mysql
 ```
 
 ### 🚀 Your Flask app continues working with the same database and data because the volume (arvind-data) keeps it persistent.
+
+# ✅ Start and Stop the Application using compose
+
+### What is Docker Compose?
+Docker Compose is a tool that lets you define and run multi‑container Docker applications using a single configuration file (typically **docker‑compose.yml**) instead of many individual docker run commands.
+
+
+**📄 How it works**
+You define:
+- **Services** — each container part of your app (e.g., database, API, frontend)
+- **Networks** — how services connect
+- **Volumes** — persistent storage for containers
+
+```bash
+docker compose up --build -d
+```
+
+*Builds and starts all services defined in the `docker-compose.yml` file in detached mode.*
+
+```bash
+docker compose down
+```
+
+*Stops and removes all containers and networks created by the `up` command.*
+
+  > By default, this command stops and deletes the containers and networks created by `docker compose up`, but does **not** delete named volumes unless the `-v` flag is also used.
